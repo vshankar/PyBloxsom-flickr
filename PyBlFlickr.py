@@ -39,6 +39,9 @@
 
 """
 
+__author__ = "Venky Shankar - venkyshankar at yahoo dot com"
+__description__ = "Show random Flickr photos from your account on your blog."
+
 """
     Constants
 """
@@ -89,6 +92,10 @@ class PyBlGenFlickrHTML:
         return (FLICKR_SIGNATURE % (self._flickrSecret,self._flickrKey,self._flickrAuth,s))
 
     def getFlickrXMlData(self, pg):
+        """
+            Call flickr photo search API with the required
+            parameters and store the response in _flickrXML
+        """
         flickrArgs = {}
         flickrArgs["method"] = "flickr.photos.search"
         flickrArgs["page"] = STR_FMT % pg
@@ -129,6 +136,10 @@ class PyBlGenFlickrHTML:
                     self._flickrNrCols = self._request.getConfiguration().get("flickrNrRows", DEFAULT_NR_ROWS)
 
     def parseFlickrXMlToHTML(self):
+        """
+            Parse the XML stored in _flickrXML
+            and generate the table markup.
+        """
         import xml.parsers.expat
 
         p = xml.parsers.expat.ParserCreate()
@@ -159,9 +170,17 @@ class PyBlGenFlickrHTML:
         return 0
 
     def cacheData(self, mc, k, v):
+        """
+            Cache data with the given key
+            for timwout in _cacheTimeout.
+        """
         mc.set(k, v, self._cacheTimeout)
 
     def cacheMultiData(self, mc, dict):
+        """
+            Same as above but for multiple
+            key/values.
+        """
         mc.set_multi(dict, self._cacheTimeout)
 
     def getFlickrMarkup(self):
