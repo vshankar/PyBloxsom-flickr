@@ -1,0 +1,31 @@
+0. Copy PyBlFlickr.py to your plugins directory.
+
+1. Configuration in config.py:-
+	py["flickrKey"] = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+	py["flickrSecret"] = "XXXXXXXXXXXX"
+	py["flickrAuth"] = "XXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXX"
+
+	Note: To get flickr API keys go here: http://www.flickr.com/api
+
+2. Other optional configurations.
+	- To enable caching responses from flickr:-
+	(Note: This plugin uses memcached to store cache data hence you would
+		  need python-memcached installed.)
+
+		py["cacheEnabled"] = 1 # enable caching 
+	    py["cacheServers"] = ['192.168.1.2:11211','192.168.1.3:11211']  # list of cache servers, defaults to 127.0.0.1:11211
+		py["cacheTimeout"] = 1 * 60 * 60 # cache response for 1 Hr.
+
+	- By default the thumbnail images are generated in 2x3 matrix.
+	  To change this layout use:- (e.g. 3x3 layout)
+
+		py["flickrNrRows"] = 3
+		py["flickrNrCols"] = 3
+
+3. Finally in you footer page put the following:-
+	<table border="1" align="center">
+		$flickrHTML
+	</table> 
+
+
+
